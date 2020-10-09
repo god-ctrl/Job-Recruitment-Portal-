@@ -1,9 +1,27 @@
 const User = require("../models/user");
 
 module.exports.profile=function(req,res){
-    return res.render('user',{
-        title: "User"
-    });
+    if(req.cookies.user_id)
+    {
+        User.findById(req.cookies.user_id,function(err,user){
+            if(user)
+            {
+                return res.render('user',{
+                    title:"User profile",
+                    user:user
+                });
+            }
+            else
+            {
+                return res.redirect('/users/sign-in');
+            }
+        });
+    }
+    else
+    {
+        return res.redirect('/users/sign-in');
+    }
+    
 }
 //render sighup page
 module.exports.signUp=function(req,res){
@@ -55,7 +73,7 @@ module.exports.createSession= function(req,res){
             //handle user found
             //handle mismatching passwords which dont match
             if(user.password!=req.body.password)
-            return res.redirect;
+            return res.redirect('/users/sign-up');
             res.cookie('user_id',user.id);
             return res.redirect('/users/profile');
         }
@@ -70,3 +88,10 @@ module.exports.createSession= function(req,res){
 
     
 }
+exports.signOut=function(req,res){
+    res.cookie('user_id','logout',{
+        expires:new Date(Date.now()+1000)
+    })
+    res.redirect('/');
+}
+//error kya thi ? ha maine cookie delete karne ka bana lia hai par  kuch error a raha hai logical not compile
