@@ -1,18 +1,3 @@
 <footer>
     <h5>Page Footer</h5>
-    <ul>
-        <%if(locals.user){%>
-            
-            <li>
-                <a href="/users/profile"><%=user.name%></a>
-            </li>
-            <li>
-                <a href="/">Home</a>
-            </li>       
-        <%}else{%>
-            <li>
-                <a href="/">Home</a>
-            </li>
-        <%}%>
-    </ul>
 </footer>
