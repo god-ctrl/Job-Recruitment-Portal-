@@ -52,7 +52,7 @@ passport.checkAuthentication=function(req,res,next){
         return next();//this should run when it is authenticate
     }
     //if the user is not signed in
-    return res.redirect('/users/sign-in');//always this statement is executed
+    return res.redirect('/users/sign-in');
 
 }
 passport.setAuthenticatedUser=function(req,res ,next)
