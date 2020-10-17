@@ -6,6 +6,7 @@ const homeController = require('../controllers/home_controller');
 console.log('router started');
 router.get('/',homeController.home);
 
+ 
 
 
 
