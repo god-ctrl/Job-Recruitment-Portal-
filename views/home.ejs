@@ -1,0 +1,76 @@
+<%if(locals.user){%>
+    <h2>Hello <%=user.name%>!</h2> 
+              
+        <div class="jumbotron centered">
+            <div class="container">
+              <i class="fas fa-key fa-6x"></i>
+              <h1 class="display-3">Job Portal</h1>
+              <p class="lead">Get busy living or get busy dying!</p>
+              <hr>
+              <a class="btn btn-dark btn-lg" href="/users/sign-out" role="button">Sign Out</a>
+          
+            </div>
+          </div>
+          <%}else{%>
+        <div class="jumbotron centered">
+            <div class="container">
+              <i class="fas fa-key fa-6x"></i>
+              <h1 class="display-3">Job Portal</h1>
+              <p class="lead">Get busy living or get busy dying!</p>
+              <hr>
+              <h1>
+            
+                <a class="btn btn-light btn-lg" href="/users/sign-up" role="button">Register</a>
+                  <a class="btn btn-dark btn-lg" href="/users/sign-in" role="button">Login</a>
+              
+            </h1>
+            
+            </div>
+          </div>
+          <%}%>
+
+
+
+          
+          <div class="middle-container">
+            <section id="feed-post">
+                <h4>Posts</h4>
+                <% if (locals.user){%>
+                <form action="/posts/create" id="new-post-form" method="POST">
+                    <textarea name="content" cols="30" rows="3" placeholder="What is on your mind?"></textarea>
+                    <input type="submit"  value="Post"> 
+                </form>
+                <%}%>
+            
+                <div id="post-list-container">
+                    <ul>
+                        <%for(post of posts){%>
+                            <%- include('_post')-%>
+                            
+                        <%}%>
+                    </ul>
+                </div>
+                
+            </section>
+          </div>
+
+
+
+<div class="bottom-container">
+     <section id="user-friends">
+                <h4>Friends</h4>
+        <%for(u of all_users){%>
+                   
+                    <p> 
+                         
+                        <a href="/users/profile/<%=u.id%>"><%=u.name%></a>
+                    </p>
+                   
+                <%}%>
+            </section>
+          </div>
+
+
+
+
+            
