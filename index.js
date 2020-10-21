@@ -1,5 +1,5 @@
 const express=require('express');
-const cookieParser= require('cookie-parser');
+const cookieParser= require('cookie-parser'); //kdlnvklsn
 const port=8000;
 const app=express();
 const expressLayouts =require('express-ejs-layouts');
