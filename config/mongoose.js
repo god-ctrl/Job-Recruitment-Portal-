@@ -1,5 +1,5 @@
 const mongoose=require('mongoose');
-mongoose.connect('mongodb://localhost/codecial_devlopment');
+mongoose.connect('mongodb://localhost/codecial_devlopment_improved');
 const db=mongoose.connection;
 db.on('error',console.error.bind(console,"Error in connection gto mongodb"));
 db.once('open',function(){

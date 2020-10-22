@@ -8,7 +8,7 @@ router.get('/',homeController.home);
 
  
 
-
+router.use('/company',require('./company'))
 
 router.use('/users',require('./users'));
 

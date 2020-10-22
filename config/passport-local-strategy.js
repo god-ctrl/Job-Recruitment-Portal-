@@ -1,16 +1,38 @@
 const passport=require('passport');
+const Company = require('../models/company');
 const User = require('../models/user');
 
 const LocalStrategy=require('passport-local').Strategy;
 
 
 //authentication using passort
-passport.use(new LocalStrategy({
+passport.use('user-locals',new LocalStrategy({
     usernameField: 'email'
     },
     function(email,password,done){
         //find a user and establish the identity
         User.findOne({email:email},function(err,user){
+            if(err){
+                console.log('error in finding user--->password');
+                return done(err);
+            }
+            if(!user||user.password!=password)
+            {
+                console.log('invalid username and password');
+                return done(null,false);
+            }
+            return done(null,user);
+
+        });
+    }
+));
+
+passport.use('company-locals',new LocalStrategy({
+    usernameField: 'email'
+    },
+    function(email,password,done){
+        //find a user and establish the identity
+        Company.findOne({email:email},function(err,user){
             if(err){
                 console.log('error in finding user--->password');
                 return done(err);
@@ -39,8 +61,17 @@ passport.deserializeUser(function(id,done){
             console.log('error in finding user--->password');
             return done(err);
         }
+        if(user)
         return done(null,user);
+        Company.findById(id,function(err,company){
+            if(err){
+                console.log('error in finding company--->password');
+                return done(err);
+            }
+            return done(null,company);
+        });
     });
+
 });
 
 //check if the user is authenticated
@@ -64,4 +95,3 @@ passport.setAuthenticatedUser=function(req,res ,next)
 }
 
 module.exports=passport;
-//this file seems fine ,  ya
