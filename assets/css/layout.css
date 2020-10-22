@@ -15,4 +15,10 @@ body {
     color: #fff;
     background-color: #000;
   }
-  
+  .middle-container{
+    margin: 100px 0;
+  }
+  .bottom-container{
+    background-color: #66BFBF;
+    padding: 50px 0 20px;
+  }
