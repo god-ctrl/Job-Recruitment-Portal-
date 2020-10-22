@@ -8,7 +8,7 @@ const jobSchema=new mongoose.Schema({
         type: String,
         required: true
     },
-    datePosted: {
+    dateposted: {
         type: Date,
         required: true
     },
@@ -18,20 +18,17 @@ const jobSchema=new mongoose.Schema({
     location: {
         type: String
     },
-    education: {
-        type: String
-    },
     experience: {
         type: Number
     },
-    baseSalary: {
+    basesalary: {
         type: String
     },
     company: {
         type:mongoose.Schema.Types.ObjectId,
         ref: 'Company'
     },
-    //include the ids of comments in an array
+    
 
     applicants: [{
         

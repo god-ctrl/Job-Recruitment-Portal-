@@ -7,8 +7,11 @@
               <h1 class="display-3">Job Portal</h1>
               <p class="lead">Get busy living or get busy dying!</p>
               <hr>
+              <% if(user.gender){ %>
               <a class="btn btn-dark btn-lg" href="/users/sign-out" role="button">Sign Out</a>
-          
+              <% }else{ %>
+                <a class="btn btn-dark btn-lg" href="/company/sign-out" role="button">Sign Out</a>
+                <%}%>
             </div>
           </div>
           <%}else{%>
