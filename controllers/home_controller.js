@@ -1,7 +1,9 @@
 
 const Post = require("../models/post");
+const Job = require("../models/job");
 
 const User = require("../models/user");
+const Company = require("../models/company");
 module.exports.home=function(req,res){
    
         // console.log(req.cookies);
@@ -25,10 +27,16 @@ module.exports.home=function(req,res){
         })
         .exec(function(err,posts){
             User.find({},function(err,users){
-                     return res.render('home',{
-                    title: "Codecial|Home",
-                    posts: posts,
-                    all_users: users
+                    Job.find({})
+                    .populate('company')
+                    .exec(function(err, jobs){
+                        return res.render('home',{
+                            title: "Codecial|Home",
+                            posts: posts,
+                            jobs: jobs,
+                            all_users: users
+                    });
+                    
             });
             
         });

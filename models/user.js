@@ -14,10 +14,13 @@ const userSchema=new mongoose.Schema({
         type: String,
         required:true
     },
-    gender : {
-        type : String,
-        required : true
+    isuser: {
+        type: Boolean
     }
+    // gender : {
+    //     type : String,
+    //     required : true
+    // },
     // phoneNumber : {
     //     type : Number,
     //     required : true

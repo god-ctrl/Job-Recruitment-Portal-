@@ -1,4 +1,5 @@
 <%if(locals.user){%>
+    
     <h2>Hello <%=user.name%>!</h2> 
               
         <div class="jumbotron centered">
@@ -42,6 +43,25 @@
                 </form>
                 <%}%>
             
+                <div id="post-list-container">
+                  <ul>
+                      <%for(job of jobs){%>
+                        <li>
+                          Title:-<%=job.title%>    <br>
+                          Description:-<%=job.description%>    <br>
+                          Skills:-<%=job.skills%><br>
+                          Date Posted:-<%=job.dateposted%><br>
+                          Loaction:-<%=job.location%><br>
+                          Experience:-<%=job.experience%><br>
+                          Base Salary:-<%=job.basesalary%><br>
+                          Base Salary:-<%=job.basesalary%><br>
+                          Company:-<%=job.company.companyName%><br>
+                      </li>
+                          
+                      <%}%>
+                  </ul>
+              </div>
+
                 <div id="post-list-container">
                     <ul>
                         <%for(post of posts){%>

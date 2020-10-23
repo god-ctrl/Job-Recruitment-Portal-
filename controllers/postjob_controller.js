@@ -23,7 +23,7 @@ module.exports.create=function(req,res){
     })
 }
 module.exports.newjob=function(req,res){
-    
+
     return res.render('postjob' ,{
         title: "create new job"
 })
@@ -52,4 +52,4 @@ module.exports.destroy = function(req,res){
             return res.redirect('back');
         }
     });
-}
+} 
