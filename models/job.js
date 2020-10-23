@@ -18,7 +18,6 @@ const jobSchema=new mongoose.Schema({
     location: {
         type: String
     },
-    
     experience: {
         type: Number
     },

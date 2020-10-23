@@ -12,4 +12,4 @@ router.get('/destroy/:id',passport.checkAuthentication,postjobController.destroy
 
 router.get('/newjob',passport.checkAuthentication,postjobController.newjob);
 
-module.exports=router; 
+module.exports=router;
