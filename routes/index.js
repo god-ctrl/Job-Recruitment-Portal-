@@ -12,6 +12,8 @@ router.use('/company',require('./company'))
 
 router.use('/users',require('./users'));
 
+router.use('/postjob',require('./postjob'));
+
 router.use('/posts',require('./posts'));
 
 router.use('/comments',require('./comments'));
