@@ -1,5 +1,5 @@
 const User = require("../models/user");
-
+const Company = require("../models/company");
 module.exports.profile=function(req,res){
     User.findById(req.params.id,function(err,user){
         return res.render('user' ,{
@@ -8,7 +8,7 @@ module.exports.profile=function(req,res){
         });
     })
    
-}//
+}
 module.exports.profile2=function(req,res){
     
         return res.render('user' ,{
@@ -16,6 +16,27 @@ module.exports.profile2=function(req,res){
     })
    
 }
+
+module.exports.subs=function(req,res){
+    console.log('yaha aya tha');
+    User.findById(req.body.user,function(err,user){
+        console.log("yaha bhi aya tha");
+        if(user){
+                 
+            console.log(req.params.id);
+            user.subs.push(req.params.id);
+            user.save();
+
+            res.redirect('/');
+        }
+        else
+        {
+            console.log('user not found');
+            res.redirect('back');
+        }
+    })
+}
+
 module.exports.update=function(req,res){
     if(req.user.id==req.params.id)
     {

@@ -16,7 +16,12 @@ const userSchema=new mongoose.Schema({
     },
     isuser: {
         type: Boolean
-    }
+    },
+    subs: [{
+        type:mongoose.Schema.Types.ObjectId,
+        ref: 'Company'
+    }]
+
     // gender : {
     //     type : String,
     //     required : true

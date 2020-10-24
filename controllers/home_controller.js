@@ -30,12 +30,16 @@ module.exports.home=function(req,res){
                     Job.find({})
                     .populate('company')
                     .exec(function(err, jobs){
-                        return res.render('home',{
-                            title: "Codecial|Home",
-                            posts: posts,
-                            jobs: jobs,
-                            all_users: users
-                    });
+                        Company.find({}, function(err, company){
+                            return res.render('home',{
+                                title: "Codecial|Home",
+                                posts: posts,
+                                jobs: jobs,
+                                all_users: users,
+                                all_company: company
+                        });
+                        });
+                        
                     
             });
             

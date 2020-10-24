@@ -8,12 +8,11 @@ module.exports.profile=function(req,res){
         });
     })
    
-}//
+}
 module.exports.profile2=function(req,res){
     
         return res.render('company' ,{
-            title: "Company",
-            company:"yes"
+            title: "Company"
     })
    
 }
@@ -23,7 +22,7 @@ module.exports.update=function(req,res){
         Company.findByIdAndUpdate(req.params.id,req.body,function(err,user){
                 if(err)
                 {
-                    console.log('error in updating user');
+                    console.log('error in updating company');
                     return;
                 }
                 return res.redirect('back');    
