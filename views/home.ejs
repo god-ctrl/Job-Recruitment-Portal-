@@ -39,9 +39,11 @@
 <!-- List of all jobs only for seekers  -->
 
           <%if(locals.user){%>
-              <h2>JOBS</h2>
+              
             <% if(user.isuser){ %>
+              <h2>JOBS</h2>
           <div id="job-list-container" style="background-color: #CCEABB;">
+
             <ul>
                 <%for(job of jobs){%>
                   <li>
@@ -53,6 +55,10 @@
                     Experience:-<%=job.experience%><br>
                     Base Salary:-<%=job.basesalary%><br>
                     Company:-<%=job.company.companyName%><br>
+                    <form action="users/apply/<%=job._id%>" method = "POST">
+                      <input type="submit"  value="APPLY"> 
+                      <input type="hidden" name="user" value="<%=user._id%>">
+                    </form>
                 </li>
                     <hr>
                 <%}%>

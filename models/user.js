@@ -20,6 +20,10 @@ const userSchema=new mongoose.Schema({
     subs: [{
         type:mongoose.Schema.Types.ObjectId,
         ref: 'Company'
+    }],
+    applied_jobs: [{
+        type:mongoose.Schema.Types.ObjectId,
+        ref: 'Job'
     }]
 
     // gender : {

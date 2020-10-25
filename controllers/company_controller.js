@@ -1,5 +1,8 @@
 const Company = require("../models/company");
 
+const Job = require('../models/job');
+
+// Jab koi or khole
 module.exports.profile=function(req,res){
     Company.findById(req.params.id,function(err,company){
         return res.render('company' ,{
@@ -9,12 +12,16 @@ module.exports.profile=function(req,res){
     })
    
 }
+// jab woh khud khole
 module.exports.profile2=function(req,res){
-    
+    // console.log(req.user._id);
+    Job.find({company: req.user.id}, function(err, job) {
         return res.render('company' ,{
-            title: "Company"
+            title: "Company",
+            job: job
     })
-   
+    })
+
 }
 module.exports.update=function(req,res){
     if(req.user.id==req.params.id)

@@ -8,6 +8,9 @@ router.get('/sign-up',usersController.signUp);
 router.get('/sign-in',usersController.signIn);
 router.get('/sign-out',usersController.destroySession);
 router.post('/create',usersController.create);
+// to apply for a job
+router.post('/apply/:id',usersController.apply);
+// to subscribe to a company
 router.post('/subscribe/:id',usersController.subs);
 router.post('/update/:id',passport.checkAuthentication,usersController.update);
 //use passport as a middleware

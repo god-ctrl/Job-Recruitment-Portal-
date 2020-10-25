@@ -1,5 +1,4 @@
-
-  <link  rel="stylesheet" href="/css/user_profile.css">
+<link  rel="stylesheet" href="/css/user_profile.css">
   
   <%if(locals.profile_company){%>
     <h1>
@@ -15,7 +14,8 @@
     <%}%>
     <p><%=profile_company.companyName%></p>
     <p><%=profile_company.email%></p>
-  <%}else{%>
+    <!-- ye hai company ki profile se dekhna -->
+  <%}else{%>   
     <h1>
       Company:<%=user.companyName%>
     </h1>
@@ -27,7 +27,33 @@
     <p><%=user.name%></p>
     <p><%=user.email%></p>
 
+<hr>
+<div class="bottom-container" style="background-color: #CCEABB;">
+  <section id="user-friends">
+             <h4>All Jobs Posted By <%=user.companyName%></h4>
+             <h1><%=job.title%></h1>
+             <ul>
+              <%for(j of job){%>
+                <li>
+                  Title:-<%=j.title%>    <br>
+                Description:-<%=j.description%>    <br>
+                Skills:-<%=j.skills%><br>
+                Date Posted:-<%=j.dateposted%><br>
+                Loaction:-<%=j.location%><br>
+                Experience:-<%=j.experience%><br>
+                Base Salary:-<%=j.basesalary%>
+                </li>
+                <hr>
+                <%}%>
+             </ul>
+         </section>
+       </div>
+
   <%}%>
   
   
     
+
+
+
+  

@@ -1,5 +1,8 @@
 const User = require("../models/user");
 const Company = require("../models/company");
+// const Application = require("../models/application");
+const Job = require("../models/job");
+
 module.exports.profile=function(req,res){
     User.findById(req.params.id,function(err,user){
         return res.render('user' ,{
@@ -15,6 +18,31 @@ module.exports.profile2=function(req,res){
             title: "User"
     })
    
+}
+
+module.exports.apply=function(req,res){
+    
+    Job.findById(req.params.id, function(err, job){
+        console.log('job id:' + job.id);
+        if(err){
+            console.log('error in finding this job');
+            return ;
+        }
+        job.applicants.push(req.body.user);
+        job.save();
+        User.findById(req.body.user, function(err, user) {
+            if(err){
+                console.log('error in filling applied_jobs for this user');
+                return ;
+            }
+            console.log('user id: this is' +user.id + 'and job id: ' + job.id);
+            
+            user.applied_jobs.push(job.id);
+            user.save();
+            res.redirect('/');
+        })
+    })
+
 }
 
 module.exports.subs=function(req,res){
@@ -58,6 +86,7 @@ module.exports.update=function(req,res){
 
 //render sighup page
 module.exports.signUp=function(req,res){
+
     if(req.isAuthenticated()){
         return res.redirect('/users/profile');
     }
