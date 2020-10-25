@@ -6,10 +6,10 @@ const applicationSchema=new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId, // NOT USING IT!!!!!!!!!!!!!
         ref: 'User'
     },    
-    job:[{
+    job:{
         type:mongoose.Schema.Types.ObjectId,// NOT USING IT!!!!!!!!!!!!!
         ref: 'Job'
-    }]
+    }
 },{
     timestamps:true
 });

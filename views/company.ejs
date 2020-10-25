@@ -42,6 +42,15 @@
                 Loaction:-<%=j.location%><br>
                 Experience:-<%=j.experience%><br>
                 Base Salary:-<%=j.basesalary%>
+                <ul>
+                  <h5>Applicants for this JOB</h5>
+                  <%for(a of j.applicants){%>
+                    <li>
+                      <%=a.email%>    
+                     
+                    </li>
+                    <%}%>
+                </ul>
                 </li>
                 <hr>
                 <%}%>

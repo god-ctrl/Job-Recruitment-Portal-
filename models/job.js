@@ -33,10 +33,12 @@ const jobSchema=new mongoose.Schema({
     applicants: [{
         
             type:mongoose.Schema.Types.ObjectId,
+            
             ref: 'User'
         
         
-    }]
+    }
+]
 },{
     timestamps:true
 });

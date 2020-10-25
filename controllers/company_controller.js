@@ -1,5 +1,5 @@
 const Company = require("../models/company");
-
+const User = require('../models/user');
 const Job = require('../models/job');
 
 // Jab koi or khole
@@ -15,12 +15,17 @@ module.exports.profile=function(req,res){
 // jab woh khud khole
 module.exports.profile2=function(req,res){
     // console.log(req.user._id);
-    Job.find({company: req.user.id}, function(err, job) {
-        return res.render('company' ,{
-            title: "Company",
-            job: job
-    })
-    })
+    Job.find({company: req.user.id})
+        .populate({
+            path:'applicants'
+        })
+        .exec(function(err, job){
+            
+            return res.render('company' ,{
+                title: "Company",
+                job: job
+        });
+        });  
 
 }
 module.exports.update=function(req,res){
