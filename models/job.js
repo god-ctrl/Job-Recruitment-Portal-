@@ -31,14 +31,15 @@ const jobSchema=new mongoose.Schema({
  
 
     applicants: [{
-        
+        user: {
             type:mongoose.Schema.Types.ObjectId,
-            
             ref: 'User'
-        
-        
-    }
-]
+        },
+        status: {
+            type: String,
+            default: 'Pending'
+        }
+    }]
 },{
     timestamps:true
 });

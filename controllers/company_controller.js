@@ -19,6 +19,12 @@ module.exports.profile2=function(req,res){
         .populate({
             path:'applicants'
         })
+        .populate({
+            path:'applicants',
+            populate : {
+                path: 'user'
+            }
+        })
         .exec(function(err, job){
             
             return res.render('company' ,{
@@ -27,6 +33,27 @@ module.exports.profile2=function(req,res){
         });
         });  
 
+}
+// to select a candidate
+module.exports.select=function(req,res){
+    
+    Job.find({company: req.body.company})
+       .populate('applicants') 
+       .exec(function(err, job){
+        
+           for(b of job)
+           {for(a of b.applicants){
+            console.log(a);
+               if(a.user == req.params.id)
+               {    console.log(a.status);
+                   a.status = "confirmed";
+                   console.log(a.status);
+                }
+                b.save();
+                
+           }}
+           res.redirect('/company/profile');
+       })
 }
 module.exports.update=function(req,res){
     if(req.user.id==req.params.id)

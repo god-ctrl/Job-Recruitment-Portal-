@@ -28,7 +28,7 @@ module.exports.apply=function(req,res){
             console.log('error in finding this job');
             return ;
         }
-        job.applicants.push(req.body.user);
+        job.applicants.push({user: req.body.user, status: "pending hai bro"});
         job.save();
         User.findById(req.body.user, function(err, user) {
             if(err){
