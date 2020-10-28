@@ -12,6 +12,11 @@
         <input type="submit" value="Update">
       </form>
     <%}%>
+    <h2>Post by <%=profile_company.companyName%></h2>
+    <%for(post of posts){%>
+      <%- include('_post')-%>
+      
+    <%}%>
     <p><%=profile_company.companyName%></p>
     <p><%=profile_company.email%></p>
     <!-- ye hai company ki profile se dekhna -->
@@ -24,9 +29,26 @@
       <input type="email" name="email" placeholder="Your email" value="<%=user.email%>" required>
       <input type="submit" value="Update">
     </form>
+    <h2>Post by <%=user.companyName%></h2>
+    <div class="middle-container">
+      <section id="feed-post">
+          <h4>Posts</h4>
+          <% if (locals.user){%>
+          <form action="/posts/create" id="new-post-form" method="POST">
+              <textarea name="content" cols="30" rows="3" placeholder="What is on your mind?"></textarea>
+              <input type="submit"  value="Post"> 
+          </form>
+          <%}%>
+        </section>
+      </div>
+    <%for(post of posts){%>
+      <%- include('_post')-%>
+      
+    <%}%>
     <p><%=user.name%></p>
     <p><%=user.email%></p>
-
+    
+    
 <hr>
 <div class="bottom-container" style="background-color: #CCEABB;">
   <section id="user-friends">

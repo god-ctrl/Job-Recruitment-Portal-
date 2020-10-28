@@ -2,12 +2,14 @@ const User = require("../models/user");
 const Company = require("../models/company");
 // const Application = require("../models/application");
 const Job = require("../models/job");
+const Post = require("../models/post");
 
 module.exports.profile=function(req,res){
     User.findById(req.params.id,function(err,user){
         return res.render('user' ,{
             title: "User",
             profile_user: user
+            
         });
     })
    

@@ -17,15 +17,7 @@ module.exports.home=function(req,res){
 
         //populate the user of each post
         
-        Post.find({})
-        .populate('user')
-        .populate({
-            path:'comments',
-            populate : {
-                path: 'user'
-            }
-        })
-        .exec(function(err,posts){
+        
             User.find({},function(err,users){
                     Job.find({})
                     .populate('company')
@@ -33,7 +25,6 @@ module.exports.home=function(req,res){
                         Company.find({}, function(err, company){
                             return res.render('home',{
                                 title: "Codecial|Home",
-                                posts: posts,
                                 jobs: jobs,
                                 all_users: users,
                                 all_company: company
@@ -45,6 +36,6 @@ module.exports.home=function(req,res){
             
         });
 
-    })
+    
     
 }

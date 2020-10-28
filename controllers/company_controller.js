@@ -2,37 +2,106 @@ const Company = require("../models/company");
 const User = require('../models/user');
 const Job = require('../models/job');
 
+const Post = require('../models/post');
 // Jab koi or khole
-module.exports.profile=function(req,res){
-    Company.findById(req.params.id,function(err,company){
-        return res.render('company' ,{
-            title: "Company",                    
-            profile_company: company
-        });
-    })
+// module.exports.profile=function(req,res){
+//     Company.findById(req.params.id,function(err,company){
+//         return res.render('company' ,{
+//             title: "Company",                    
+//             profile_company: company
+//         });
+//     })
    
-}
-// jab woh khud khole
-module.exports.profile2=function(req,res){
-    // console.log(req.user._id);
-    Job.find({company: req.user.id})
+// }
+// // jab woh khud khole
+// module.exports.profile2=function(req,res){
+//     // console.log(req.user._id);
+//     Job.find({company: req.user.id})
+//         .populate({
+//             path:'applicants'
+//         })
+//         .populate({
+//             path:'applicants',
+//             populate : {
+//                 path: 'user'
+//             }
+//         })
+//         .exec(function(err, job){
+            
+//             return res.render('company' ,{
+//                 title: "Company",
+//                 job: job
+//         });
+//         });  
+
+// }
+module.exports.profile=function(req,res){
+    Company.findById(req.params.id,function(err,user){
+        Post.find({user:user._id})
+        .populate('user')
         .populate({
-            path:'applicants'
-        })
-        .populate({
-            path:'applicants',
+            path:'comments',
             populate : {
                 path: 'user'
             }
         })
-        .exec(function(err, job){
-            
-            return res.render('company' ,{
-                title: "Company",
-                job: job
+        .exec(function(err,posts){
+            Job.find({company: req.params.id})
+            .populate({
+                path:'applicants'
+            })
+            .populate({
+                path:'applicants',
+                populate : {
+                    path: 'user'
+                }
+            })
+            .exec(function(err, job){
+                return res.render('company',{
+                    title: "Company",
+                    profile_company: user,
+                    posts: posts,
+                    job: job
+                  
+            });
+            });  
+                
+             });
         });
-        });  
+              
+}
 
+ 
+module.exports.profile2=function(req,res){
+
+        Post.find({user:req.user._id})
+        .populate('user')
+        .populate({
+            path:'comments',
+            populate : {
+                path: 'user'
+            }
+        })
+        .exec(function(err,posts){
+            Job.find({company: req.params.id})
+            .populate({
+                path:'applicants'
+            })
+            .populate({
+                path:'applicants',
+                populate : {
+                    path: 'user'
+                }
+            })
+            .exec(function(err, job){
+                return res.render('company',{
+                    title: "Company",
+                    posts: posts,
+                    job: job
+                   
+            });
+            });               
+        });                
 }
 // to select a candidate
 module.exports.select=function(req,res){

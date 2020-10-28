@@ -13,6 +13,7 @@
     <%}%>
     <p><%=profile_user.name%></p>
     <p><%=profile_user.email%></p>
+    
   <%}else{%>
     <form action="/users/update/<%=user.id%>" method="POST">
       <input type="text" name="name" placeholder="Your new Name" value="<%user.name%>" required>
@@ -21,6 +22,7 @@
     </form>
     <p><%=user.name%></p>
     <p><%=user.email%></p>
+    
 
   <%}%>
   
