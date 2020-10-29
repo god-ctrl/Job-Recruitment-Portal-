@@ -21,7 +21,31 @@ module.exports.profile2=function(req,res){
     })
    
 }
+module.exports.getCompany=function(req,res) {
+            User.find({},function(err,users){
+                Job.find({})
+                .populate('company')
+                .exec(function(err, jobs){
+                    Company.find({}, function(err, company){
+                        console.log(req.body);
+                        Company.find({companyName:req.body.kompany},function(err,companyFound){
+                                    console.log(companyFound.length);
+                                return res.render('home',{
+                                title: "Codecial|Home",
+                                jobs: jobs,
+                                all_users: users,
+                                all_company: company,
+                                companyFound: companyFound
+                        });
+                        
+                    });
+                    });
+                    
+                
+        });
 
+        });
+}
 module.exports.apply=function(req,res){
     
     Job.findById(req.params.id, function(err, job){
@@ -68,6 +92,7 @@ module.exports.subs=function(req,res){
 }
 
 module.exports.update=function(req,res){
+    console.log(req.body);
     if(req.user.id==req.params.id)
     {
         User.findByIdAndUpdate(req.params.id,req.body,function(err,user){
