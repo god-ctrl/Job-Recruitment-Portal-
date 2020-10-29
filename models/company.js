@@ -16,6 +16,10 @@ const companySchema=new mongoose.Schema({
     },
     isuser: {
         type: Boolean
+    },
+    Type: {
+        type: String,
+        required: true
     }
     // },
     // location:  {

@@ -28,8 +28,8 @@ module.exports.getCompany=function(req,res) {
                 .exec(function(err, jobs){
                     Company.find({}, function(err, company){
                         console.log(req.body);
-                        Company.find({companyName:req.body.kompany},function(err,companyFound){
-                                    console.log(companyFound.length);
+                        Company.find( { $or:[ {'companyName':req.body.kompany}, {'Type':req.body.kompany} ]},function(err,companyFound){
+                                    
                                 return res.render('home',{
                                 title: "Codecial|Home",
                                 jobs: jobs,
