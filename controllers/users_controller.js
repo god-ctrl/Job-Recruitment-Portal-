@@ -15,7 +15,7 @@ module.exports.profile=function(req,res){
     })
    
 }
-
+// jab wo khud khole
 module.exports.profile2 = async function (req, res) {
     let notif = []
     let user = await User.findById(req.user._id).populate('applied_jobs').exec()
@@ -37,40 +37,6 @@ module.exports.profile2 = async function (req, res) {
     })
   }
 
-// jab wo khud khole
-// module.exports.profile2=function(req,res){
-//     let notif = [];
-//     // console.log(notif.length);
-//     User.findById(req.user._id)
-//         .populate('applied_jobs')
-//         .exec(function(err, user){
-//             for(a of user.applied_jobs){
-//                 console.log("allo matar");
-//                 Job.findById(a._id)
-//                 .populate('applicants')
-//                 .exec(function(err, job){
-//                     for(a of job.applicants){
-//                         if(a.user == user.id && a.notification=="yes"){
-                            
-//                             notif.push(job.title);
-//                             console.log(job.title);
-//                             a.notification="no";
-                           
-//                             console.log("yahan pe agae");
-//                         }
-                        
-//                     }
-//                     job.save();
-//                     console.log("**********",notif.length);
-//                     return res.render('user' ,{
-//                     title: "User",
-//                     notif: notif
-//                 });
-        
-//                 })
-//             }
-//         })
-// }
 
 module.exports.getCompany=function(req,res) {
     User.find({},function(err,users){
@@ -100,20 +66,23 @@ module.exports.getCompany=function(req,res) {
 module.exports.apply=function(req,res){
     
     Job.findById(req.params.id, function(err, job){
-        console.log('job id:' + job.id);
+        // console.log('job id:' + job.id);
         if(err){
             console.log('error in finding this job');
             return ;
         }
-        job.applicants.push({user: req.body.user, status: "pending hai bro"});
-        job.save();
+        if(job.applicants.some(person => person.user == req.body.user)==false){
+            job.applicants.push({user: req.body.user, status: "pending hai bro"});
+            job.save();
+        } 
+        
         User.findById(req.body.user, function(err, user) {
             if(err){
                 console.log('error in filling applied_jobs for this user');
                 return ;
             }
             // console.log('user id: this is' +user.id + 'and job id: ' + job.id);
-            
+            if(user.applied_jobs.includes(job.id)==false)
             user.applied_jobs.push(job.id);
             user.save();
             res.redirect('/');
@@ -123,12 +92,13 @@ module.exports.apply=function(req,res){
 }
 
 module.exports.subs=function(req,res){
-    console.log('yaha aya tha');
+    // console.log('yaha aya tha');
     User.findById(req.body.user,function(err,user){
-        console.log("yaha bhi aya tha");
+        // console.log("yaha bhi aya tha");
         if(user){
                  
-            console.log(req.params.id);
+            // console.log(req.params.id);
+            if(user.subs.includes(req.params.id)==false)
             user.subs.push(req.params.id);
             user.save();
 

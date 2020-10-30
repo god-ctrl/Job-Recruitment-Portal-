@@ -19,6 +19,7 @@ module.exports.home=function(req,res){
         
         
             User.find({},function(err,users){
+                
                     Job.find({})
                     .populate('company')
                     .exec(function(err, jobs){

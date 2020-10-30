@@ -3,38 +3,9 @@ const User = require('../models/user');
 const Job = require('../models/job');
 
 const Post = require('../models/post');
-// Jab koi or khole
-// module.exports.profile=function(req,res){
-//     Company.findById(req.params.id,function(err,company){
-//         return res.render('company' ,{
-//             title: "Company",                    
-//             profile_company: company
-//         });
-//     })
-   
-// }
-// // jab woh khud khole
-// module.exports.profile2=function(req,res){
-//     // console.log(req.user._id);
-//     Job.find({company: req.user.id})
-//         .populate({
-//             path:'applicants'
-//         })
-//         .populate({
-//             path:'applicants',
-//             populate : {
-//                 path: 'user'
-//             }
-//         })
-//         .exec(function(err, job){
-            
-//             return res.render('company' ,{
-//                 title: "Company",
-//                 job: job
-//         });
-//         });  
 
-// }
+
+// Jab koi or khole
 module.exports.profile=function(req,res){
     Company.findById(req.params.id,function(err,user){
         Post.find({user:user._id})
@@ -70,8 +41,7 @@ module.exports.profile=function(req,res){
         });
               
 }
-
- 
+// jab woh khud khole
 module.exports.profile2=function(req,res){
 
         Post.find({user:req.user._id})
@@ -111,18 +81,20 @@ module.exports.select=function(req,res){
        .exec(function(err, job){
         
            for(b of job)
-           {for(a of b.applicants){
-            
+           {    
+               for(a of b.applicants){
+                
                if(a.user == req.params.id)
                 {   
-                    //  console.log(a.status);
+                    
                    a.status = "confirmed";
                    a.notification = "yes";
-                //    console.log(a.status);
+                
                 }
-                
-                
-           }}
+           }
+           b.save();
+        //    console.log(b);
+        }
            res.redirect('/company/profile');
        })
 }

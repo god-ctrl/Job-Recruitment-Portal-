@@ -41,7 +41,7 @@ const jobSchema=new mongoose.Schema({
         },
         notification: {
             type: String,
-            default: 'yes'
+            default: 'no'
         }
     }]
 },{

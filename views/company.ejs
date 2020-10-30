@@ -6,7 +6,7 @@
     </h1>
     <%if(user.id==profile_company.id){%>
       
-      <form action="/users/update/<%=profile_company.id%>" method="POST">
+      <form action="users/update/<%=profile_company.id%>" method="POST">
         <input type="text" name="name" placeholder="Your new Name" value="<%=profile_company.name%>" required>
         <input type="email" name="email" placeholder="Your email" value="<%=profile_company.email%>" required>
         <input type="submit" value="Update">
@@ -19,6 +19,33 @@
     <%}%>
     <p><%=profile_company.companyName%></p>
     <p><%=profile_company.email%></p>
+
+    <hr>
+<div class="bottom-container" style="background-color: #CCEABB;">
+  <section id="user-friends">
+             <h4>All Jobs Posted By <%=profile_company.companyName%></h4>
+             <ul>
+              <%=locals.job.length%>
+              
+              <%for(j of job){%>
+                <li>
+                  Title:-<%=j.title%>    <br>
+                Description:-<%=j.description%>    <br>
+                Skills:-<%=j.skills%><br>
+                Date Posted:-<%=j.dateposted%><br>
+                Loaction:-<%=j.location%><br>
+                Experience:-<%=j.experience%><br>
+                Base Salary:-<%=j.basesalary%>
+                <form action="/users/apply/<%=j._id%>" method = "POST">
+                  <input type="submit"  value="APPLY"> 
+                  <input type="hidden" name="user" value="<%=user._id%>">
+                </form>
+              </li>
+              <hr>
+              <%}%>
+           </ul>
+       </section>
+     </div>
     <!-- ye hai company ki profile se dekhna -->
   <%}else{%>   
     <h1>
@@ -42,7 +69,12 @@
         </section>
       </div>
     <%for(post of posts){%>
-      <%- include('_post')-%>
+      <li>
+        <%=post.user.companyName%>:-<%=post.content%>
+        <%if((locals.user)&&(post.user.id==locals.user.id)){%>
+            <a href="/posts/destroy/<%= post.id%>">X</a>
+        <%}%>
+    </li>
       
     <%}%>
     <p><%=user.name%></p>
@@ -70,10 +102,13 @@
                   <%for(a of j.applicants){%>
                     <li>
                       <a href="/users/profile/<%=a.user.id%>"><%=a.user.name%></a> 
+                      <h6>status: <%=a.status%></h6>
+                      <%if(a.status!="confirmed"){%>
                       <form action="/company/select/<%=a.user._id%>" method = "POST">
                       <input type="submit"  value="SELECT"> 
                       <input type="hidden" name="company" value="<%=user._id%>">
                     </form>
+                  <% } %>
                     </li>
                     <%}%>
                 </ul>
