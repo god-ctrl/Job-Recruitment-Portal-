@@ -118,7 +118,8 @@ module.exports.subs=function(req,res){
 module.exports.update=function(req,res){
     if(req.user.id==req.params.id)
     {
-        User.findByIdAndUpdate(req.params.id,req.body,function(err,user){
+        console.log(req.body);
+        User.findByIdAndUpdate(req.params.id,{name: req.body.name, email: req.body.email, prior_experience: req.body.prior_experience,interest: req.body.interest},function(err,user){
                 if(err)
                 {
                     console.log('error in updating user');

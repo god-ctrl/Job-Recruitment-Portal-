@@ -1,6 +1,10 @@
 <%if(locals.user){%>
   <!-- Chheck if user is logged in or not -->
+  <%if(user.isuser){%>
   <h2>Hello <%=user.name%>!</h2> 
+  <% }else{%>
+    <h2>Hello <%=user.companyName%>!</h2>
+  <% }%>
             
       <div class="jumbotron centered">
           <div class="container">

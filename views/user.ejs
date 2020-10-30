@@ -1,7 +1,7 @@
 
   <link  rel="stylesheet" href="/css/user_profile.css">
   <h1>
-      Codecial/Profile
+      Profile
   </h1>
   <%if(locals.profile_user){%>
     <%if(user.id==profile_user.id){%>
@@ -11,11 +11,17 @@
         <input type="submit" value="Update">
       </form>
     <%}%>
-    <p><%=profile_user.name%></p>
-    <p><%=profile_user.email%></p>
+    <div style="background-color: #705651; margin-bottom: 5px;">
+      <ul>
+        <h3>Name: <%=profile_user.name%></h3>
+        <h3>Email: <%=profile_user.email%></h3>
+        <h3>Experience: <%=profile_user.prior_experience%> Years</h3>
+        <h3>Skill: <%=profile_user.interest%></h3>
+      </ul></div>
+   
     <!-- Jab wo khud dekhe -->
   <%}else{%>
-    <h1><%=notif.length%></h1>
+    
     <div class="myDIV">
       <% if(notif.length==0){%>
       <i class="fas fa-bell fa-2x"></i>
@@ -34,17 +40,28 @@
         <% } %>
     </ul>
    </div>
-    
+   <div style="background-color: #705651; margin-bottom: 5px;">
+   <ul>
+    <h3>Name: <%=user.name%></h3>
+    <h3>Email: <%=user.email%></h3>
+    <h3>Experience: <%=user.prior_experience%> Years</h3>
+    <h3>Skill: <%=user.interest%></h3>
+  </ul>
+  </div>
     <form action="/users/update/<%=user.id%>" method="POST">
-      <input type="text" name="name" placeholder="Your new Name" value="<%user.name%>" required>
-      <input type="email" name="email" placeholder="Your email" value="<%=user.email%>" required>
+      <input type="text" name="name" placeholder="Your new Name" value="<%user.name%>" required><br>
+      <input type="email" name="email" placeholder="Your email" value="<%=user.email%>" required><br>
+      <input type="Number" name="prior_experience" placeholder="Your improved experience" value="<%=user.prior_experience%>" required><br>
+      <input type="text" name="interest" placeholder="Your new skill" value="<%=user.interest%>" required><br>
+        
       <input type="submit" value="Update">
     </form>
-    <p><%=user.name%></p>
-    <p><%=user.email%></p>
+   
+    
+
     
     <!-- jobs applied -->
-    <div id="job-list-container" style="background-color: #CCEABB;">
+    <div id="job-list-container" style="background-color: #ff9642;">
       <h4>All Jobs applied By <%=user.name%></h4>
       <ul>
           <%for(job of jobs){%>

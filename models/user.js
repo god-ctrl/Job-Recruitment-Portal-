@@ -24,20 +24,15 @@ const userSchema=new mongoose.Schema({
     applied_jobs: [{
         type:mongoose.Schema.Types.ObjectId,
         ref: 'Job'
-    }]
-
-    // gender : {
-    //     type : String,
-    //     required : true
-    // },
-    // phoneNumber : {
-    //     type : Number,
-    //     required : true
-    // },
-    // interests : [{
-    //     title : String,
-    //     required : true
-    // }],
+    }],
+    prior_experience: {
+        type: Number,
+        required: true
+    },
+    interest : {
+        type : String,
+        required : true
+    }
     
 
 },{

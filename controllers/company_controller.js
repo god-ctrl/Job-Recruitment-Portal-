@@ -101,7 +101,8 @@ module.exports.select=function(req,res){
 module.exports.update=function(req,res){
     if(req.user.id==req.params.id)
     {
-        Company.findByIdAndUpdate(req.params.id,req.body,function(err,user){
+        console.log(req.body);
+        Company.findByIdAndUpdate(req.params.id,{companyName: req.body.name, email: req.body.email, Type: req.body.Type},function(err,user){
                 if(err)
                 {
                     console.log('error in updating company');

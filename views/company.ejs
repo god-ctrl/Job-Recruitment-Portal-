@@ -1,9 +1,17 @@
 <link  rel="stylesheet" href="/css/user_profile.css">
   
   <%if(locals.profile_company){%>
-    <h1>
-      Company:<%=profile_company.companyName%>
-    </h1>
+    <div style="background-color: #705651; margin-bottom: 5px;">
+      <h1>
+        Profile
+      </h1>
+      <ul>
+        <h3>Company: <%=profile_company.companyName%></h3>
+        <h3>Email: <%=profile_company.email%></h3>
+        <h3>Field of interest: <%=profile_company.Type%></h3>
+      </ul>
+    </div>
+    
     <%if(user.id==profile_company.id){%>
       
       <form action="users/update/<%=profile_company.id%>" method="POST">
@@ -12,16 +20,15 @@
         <input type="submit" value="Update">
       </form>
     <%}%>
-    <h2>Post by <%=profile_company.companyName%></h2>
+    <h2>Posts by <%=profile_company.companyName%></h2>
     <%for(post of posts){%>
       <%- include('_post')-%>
       
     <%}%>
-    <p><%=profile_company.companyName%></p>
-    <p><%=profile_company.email%></p>
+    
 
     <hr>
-<div class="bottom-container" style="background-color: #CCEABB;">
+<div class="bottom-container" style="background-color: #ff9642;">
   <section id="user-friends">
              <h4>All Jobs Posted By <%=profile_company.companyName%></h4>
              <ul>
@@ -48,18 +55,27 @@
      </div>
     <!-- ye hai company ki profile se dekhna -->
   <%}else{%>   
-    <h1>
-      Company:<%=user.companyName%>
-    </h1>
-    <form action="/users/update/<%=user.id%>" method="POST">
-      <input type="text" name="name" placeholder="Your new Name" value="<%user.name%>" required>
-      <input type="email" name="email" placeholder="Your email" value="<%=user.email%>" required>
+    <div style="background-color: #705651; margin-bottom: 5px;">
+      <h1>
+        Profile
+      </h1>
+      <ul>
+        <h3>Company: <%=user.companyName%></h3>
+        <h3>Email: <%=user.email%></h3>
+        <h3>Field of interest: <%=user.Type%></h3>
+      </ul>
+    </div>
+    
+    <form action="/company/update/<%=user.id%>" method="POST">
+      <input type="text" name="name" placeholder="Your new Name" value="<%=user.companyName%>" required><br>
+      <input type="email" name="email" placeholder="Your email" value="<%=user.email%>" required><br>
+      <input type="text" name="Type" placeholder="Your new Type" value="<%=user.Type%>" required><br>
       <input type="submit" value="Update">
     </form>
-    <h2>Post by <%=user.companyName%></h2>
+    
     <div class="middle-container">
       <section id="feed-post">
-          <h4>Posts</h4>
+          
           <% if (locals.user){%>
           <form action="/posts/create" id="new-post-form" method="POST">
               <textarea name="content" cols="30" rows="3" placeholder="What is on your mind?"></textarea>
@@ -68,6 +84,7 @@
           <%}%>
         </section>
       </div>
+      <h2>Posts by <%=user.companyName%></h2>
     <%for(post of posts){%>
       <li>
         <%=post.user.companyName%>:-<%=post.content%>
@@ -77,12 +94,11 @@
     </li>
       
     <%}%>
-    <p><%=user.name%></p>
-    <p><%=user.email%></p>
+   
     
     
 <hr>
-<div class="bottom-container" style="background-color: #CCEABB;">
+<div class="bottom-container" style="background-color: #ff9642;">
   <section id="user-friends">
              <h4>All Jobs Posted By <%=user.companyName%></h4>
              <ul>
