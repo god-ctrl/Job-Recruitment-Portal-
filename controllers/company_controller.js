@@ -83,7 +83,7 @@ module.exports.profile2=function(req,res){
             }
         })
         .exec(function(err,posts){
-            Job.find({company: req.params.id})
+            Job.find({company: req.user.id})
             .populate({
                 path:'applicants'
             })
@@ -112,13 +112,15 @@ module.exports.select=function(req,res){
         
            for(b of job)
            {for(a of b.applicants){
-            console.log(a);
+            
                if(a.user == req.params.id)
-               {    console.log(a.status);
+                {   
+                    //  console.log(a.status);
                    a.status = "confirmed";
-                   console.log(a.status);
+                   a.notification = "yes";
+                //    console.log(a.status);
                 }
-                b.save();
+                
                 
            }}
            res.redirect('/company/profile');

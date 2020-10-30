@@ -6,6 +6,8 @@ router.get('/profile/:id',passport.checkAuthentication,usersController.profile);
 router.get('/profile/',passport.checkAuthentication,usersController.profile2); 
 router.get('/sign-up',usersController.signUp);
 router.get('/sign-in',usersController.signIn);
+
+router.post('/getCompany',passport.checkAuthentication,usersController.getCompany);
 router.get('/sign-out',usersController.destroySession);
 router.post('/create',usersController.create);
 // to apply for a job

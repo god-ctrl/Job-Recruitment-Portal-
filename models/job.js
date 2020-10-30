@@ -38,6 +38,10 @@ const jobSchema=new mongoose.Schema({
         status: {
             type: String,
             default: 'Pending'
+        },
+        notification: {
+            type: String,
+            default: 'yes'
         }
     }]
 },{

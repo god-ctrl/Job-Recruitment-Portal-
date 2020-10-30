@@ -1,100 +1,110 @@
 <%if(locals.user){%>
-    <!-- Chheck if user is logged in or not -->
-    <h2>Hello <%=user.name%>!</h2> 
-              
-        <div class="jumbotron centered">
-            <div class="container">
-              <i class="fas fa-key fa-6x"></i>
-              <h1 class="display-3">Job Portal</h1>
-              <p class="lead">Get busy living or get busy dying!</p>
-              <hr>
-              <!-- Diiferent sign out for diff users -->
-              <% if(user.isuser){ %>  
-                <a class="btn btn-dark btn-lg" href="/users/sign-out" role="button">Sign Out</a>
-                <% }else{ %>
-                  <a class="btn btn-dark btn-lg" href="/company/sign-out" role="button">Sign Out</a>
-                  <%}%>
-          
-            </div>
-          </div>
-          <%}else{%>
-        <div class="jumbotron centered">
-            <div class="container">
-              <i class="fas fa-key fa-6x"></i>
-              <h1 class="display-3">Job Portal</h1>
-              <p class="lead">Get busy living or get busy dying!</p>
-              <hr>
-              <h1>
-            <!-- if not logged in then show ogin and regiaster -->
-                <a class="btn btn-light btn-lg" href="/users/sign-up" role="button">Register</a>
-                  <a class="btn btn-dark btn-lg" href="/users/sign-in" role="button">Login</a>
-              
-            </h1>
+  <!-- Chheck if user is logged in or not -->
+  <h2>Hello <%=user.name%>!</h2> 
             
-            </div>
+      <div class="jumbotron centered">
+          <div class="container">
+            <i class="fas fa-key fa-6x"></i>
+            <h1 class="display-3">Job Portal</h1>
+            <p class="lead">Get busy living or get busy dying!</p>
+            <hr>
+            <!-- Diiferent sign out for diff users -->
+            <% if(user.isuser){ %>  
+              <a class="btn btn-dark btn-lg" href="/users/sign-out" role="button">Sign Out</a>
+              <% }else{ %>
+                <a class="btn btn-dark btn-lg" href="/company/sign-out" role="button">Sign Out</a>
+                <%}%>
+        
           </div>
-          <%}%>
+        </div>
+        <%}else{%>
+      <div class="jumbotron centered">
+          <div class="container">
+            <i class="fas fa-key fa-6x"></i>
+            <h1 class="display-3">Job Portal</h1>
+            <p class="lead">Get busy living or get busy dying!</p>
+            <hr>
+            <h1>
+          <!-- if not logged in then show ogin and regiaster -->
+              <a class="btn btn-light btn-lg" href="/users/sign-up" role="button">Register</a>
+                <a class="btn btn-dark btn-lg" href="/users/sign-in" role="button">Login</a>
+            
+          </h1>
+          
+          </div>
+        </div>
+        <%}%>
 
 
 <!-- List of all jobs only for seekers  -->
 
-          <%if(locals.user){%>
+        <%if(locals.user){%>
+          
+          <%if(user.isuser){%>
+            <form action="/users/getCompany" method="POST">
+              <input type="text" name="kompany" placeholder="Enter company Name or Typeof company" required>
+              <input type="submit" value="Search">
+            </form>
+            <%if(locals.companyFound){%>
+              <%=companyFound.length%>
+              <%for(company of companyFound){%>
+                <a href="/company/profile/<%=company._id%>"><%=company.companyName%></a>
+              <%}%>
+            <%}%>
+            <h2>JOBS</h2>
+        <div id="job-list-container" style="background-color: #CCEABB;">
+
+          <ul>
+              <%for(job of jobs){%>
+                <li>
+                  Title:-<%=job.title%>    <br>
+                  Description:-<%=job.description%>    <br>
+                  Skills:-<%=job.skills%><br>
+                  Date Posted:-<%=job.dateposted%><br>
+                  Loaction:-<%=job.location%><br>
+                  Experience:-<%=job.experience%><br>
+                  Base Salary:-<%=job.basesalary%><br>
+                  Company:-<%=job.company.companyName%><br>
+                  <form action="users/apply/<%=job._id%>" method = "POST">
+                    <input type="submit"  value="APPLY"> 
+                    <input type="hidden" name="user" value="<%=user._id%>">
+                  </form>
+              </li>
+                  <hr>
+              <%}%>
+          </ul>
+      </div>
+    <% } %>
+    <% } %>
+
+   
+
+      
+        <%if(locals.user){%>
+          <% if(user.isuser){ %>
+
+            <div class="bottom-container">
+              <section id="user-friends">
+                         <h4>All Companies</h4>
+                 <%for(c of all_company){%>
+                            
+                             <p> 
+                                  
+                                 <a href="/company/profile/<%=c._id%>"><%=c.companyName%></a>
+                                  <form action="users/subscribe/<%=c._id%>" method = "POST">
+                                    <input type="submit"  value="Subscribe"> 
+                                    <input type="hidden" name="user" value="<%=user._id%>">
+                                  </form>
+                             </p>
+                            
+                         <%}%>
+                     </section>
+                   </div>
+
+            <% }else{ %>
               
-            <% if(user.isuser){ %>
-              <h2>JOBS</h2>
-          <div id="job-list-container" style="background-color: #CCEABB;">
-
-            <ul>
-                <%for(job of jobs){%>
-                  <li>
-                    Title:-<%=job.title%>    <br>
-                    Description:-<%=job.description%>    <br>
-                    Skills:-<%=job.skills%><br>
-                    Date Posted:-<%=job.dateposted%><br>
-                    Loaction:-<%=job.location%><br>
-                    Experience:-<%=job.experience%><br>
-                    Base Salary:-<%=job.basesalary%><br>
-                    Company:-<%=job.company.companyName%><br>
-                    <form action="users/apply/<%=job._id%>" method = "POST">
-                      <input type="submit"  value="APPLY"> 
-                      <input type="hidden" name="user" value="<%=user._id%>">
-                    </form>
-                </li>
-                    <hr>
-                <%}%>
-            </ul>
-        </div>
-      <% } %>
-      <% } %>
-
-     
-
-        
-          <%if(locals.user){%>
-            <% if(user.isuser){ %>
-
-              <div class="bottom-container">
-                <section id="user-friends">
-                           <h4>All Companies</h4>
-                   <%for(c of all_company){%>
-                              
-                               <p> 
-                                    
-                                   <a href="/company/profile/<%=c._id%>"><%=c.companyName%></a>
-                                    <form action="users/subscribe/<%=c._id%>" method = "POST">
-                                      <input type="submit"  value="Subscribe"> 
-                                      <input type="hidden" name="user" value="<%=user._id%>">
-                                    </form>
-                               </p>
-                              
-                           <%}%>
-                       </section>
-                     </div>
-
-              <% }else{ %>
-                
-                <%}%>
-              <% } %>
+              <%}%>
+            <% } %>
 
 
 
@@ -102,4 +112,4 @@
 
 
 
-            
+          

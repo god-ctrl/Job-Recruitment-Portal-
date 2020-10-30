@@ -13,8 +13,28 @@
     <%}%>
     <p><%=profile_user.name%></p>
     <p><%=profile_user.email%></p>
-    
+    <!-- Jab wo khud dekhe -->
   <%}else{%>
+    <h1><%=notif.length%></h1>
+    <div class="myDIV">
+      <% if(notif.length==0){%>
+      <i class="fas fa-bell fa-2x"></i>
+      <% }else{%>
+        <img src="/images/Capture.JPG">
+        <!-- <i class="fas fa-bell-on fa-2x"></i> -->
+      <% } %>
+    </div>
+    <div class="hide" style="background-color: #2C2F31 ; color:white; border-radius: 5px;">
+    <ul>
+      <h1>notifications</h1>
+      <%for(n of notif){%>
+        <li>
+          <div>your application for <%= n %> got selected</div>
+        </li>
+        <% } %>
+    </ul>
+   </div>
+    
     <form action="/users/update/<%=user.id%>" method="POST">
       <input type="text" name="name" placeholder="Your new Name" value="<%user.name%>" required>
       <input type="email" name="email" placeholder="Your email" value="<%=user.email%>" required>

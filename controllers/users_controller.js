@@ -4,6 +4,7 @@ const Company = require("../models/company");
 const Job = require("../models/job");
 const Post = require("../models/post");
 
+// jab koi or khole
 module.exports.profile=function(req,res){
     User.findById(req.params.id,function(err,user){
         return res.render('user' ,{
@@ -14,14 +15,88 @@ module.exports.profile=function(req,res){
     })
    
 }
-module.exports.profile2=function(req,res){
-    
-        return res.render('user' ,{
-            title: "User"
-    })
-   
-}
 
+module.exports.profile2 = async function (req, res) {
+    let notif = []
+    let user = await User.findById(req.user._id).populate('applied_jobs').exec()
+    for (a of user.applied_jobs) {
+      let job = await Job.findById(a.id).populate('applicants').exec()
+      for (a of job.applicants) {
+        if (a.user == user.id && a.notification == "yes") {
+          notif.push(job.title);
+          a.notification = "no";//a.Applicant.update({_id: id}, {notification: "no"})
+          
+        }
+      }
+      job.save();
+    }
+    console.log(notif);
+    return res.render('user', {
+      title: "User",
+      notif: notif
+    })
+  }
+
+// jab wo khud khole
+// module.exports.profile2=function(req,res){
+//     let notif = [];
+//     // console.log(notif.length);
+//     User.findById(req.user._id)
+//         .populate('applied_jobs')
+//         .exec(function(err, user){
+//             for(a of user.applied_jobs){
+//                 console.log("allo matar");
+//                 Job.findById(a._id)
+//                 .populate('applicants')
+//                 .exec(function(err, job){
+//                     for(a of job.applicants){
+//                         if(a.user == user.id && a.notification=="yes"){
+                            
+//                             notif.push(job.title);
+//                             console.log(job.title);
+//                             a.notification="no";
+                           
+//                             console.log("yahan pe agae");
+//                         }
+                        
+//                     }
+//                     job.save();
+//                     console.log("**********",notif.length);
+//                     return res.render('user' ,{
+//                     title: "User",
+//                     notif: notif
+//                 });
+        
+//                 })
+//             }
+//         })
+// }
+
+module.exports.getCompany=function(req,res) {
+    User.find({},function(err,users){
+        Job.find({})
+        .populate('company')
+        .exec(function(err, jobs){
+            Company.find({}, function(err, company){
+                console.log(req.body);
+                Company.find( { $or:[ {'companyName':req.body.kompany}, {'Type':req.body.kompany} ]},function(err,companyFound){
+                            
+                        return res.render('home',{
+                        title: "Codecial|Home",
+                        jobs: jobs,
+                        all_users: users,
+                        all_company: company,
+                        companyFound: companyFound
+                });
+                
+            });
+            });
+            
+        
+});
+
+});
+}
 module.exports.apply=function(req,res){
     
     Job.findById(req.params.id, function(err, job){
@@ -37,7 +112,7 @@ module.exports.apply=function(req,res){
                 console.log('error in filling applied_jobs for this user');
                 return ;
             }
-            console.log('user id: this is' +user.id + 'and job id: ' + job.id);
+            // console.log('user id: this is' +user.id + 'and job id: ' + job.id);
             
             user.applied_jobs.push(job.id);
             user.save();

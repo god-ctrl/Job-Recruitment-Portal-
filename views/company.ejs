@@ -53,8 +53,9 @@
 <div class="bottom-container" style="background-color: #CCEABB;">
   <section id="user-friends">
              <h4>All Jobs Posted By <%=user.companyName%></h4>
-             <h1><%=job.title%></h1>
              <ul>
+              <%=locals.job.length%>
+              
               <%for(j of job){%>
                 <li>
                   Title:-<%=j.title%>    <br>
