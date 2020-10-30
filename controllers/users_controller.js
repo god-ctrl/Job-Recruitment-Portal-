@@ -19,8 +19,9 @@ module.exports.profile=function(req,res){
 module.exports.profile2 = async function (req, res) {
     let notif = []
     let user = await User.findById(req.user._id).populate('applied_jobs').exec()
+    let jobss= [];
     for (a of user.applied_jobs) {
-      let job = await Job.findById(a.id).populate('applicants').exec()
+      let job = await Job.findById(a.id).populate('applicants').populate('company').exec()
       for (a of job.applicants) {
         if (a.user == user.id && a.notification == "yes") {
           notif.push(job.title);
@@ -29,11 +30,13 @@ module.exports.profile2 = async function (req, res) {
         }
       }
       job.save();
+      jobss.push(job);
     }
-    console.log(notif);
+    console.log(jobss);
     return res.render('user', {
       title: "User",
-      notif: notif
+      notif: notif,
+      jobs:jobss
     })
   }
 

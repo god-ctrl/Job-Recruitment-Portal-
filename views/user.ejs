@@ -43,6 +43,35 @@
     <p><%=user.name%></p>
     <p><%=user.email%></p>
     
+    <!-- jobs applied -->
+    <div id="job-list-container" style="background-color: #CCEABB;">
+      <h4>All Jobs applied By <%=user.name%></h4>
+      <ul>
+          <%for(job of jobs){%>
+            <li>
+              Title:-<%=job.title%>    <br>
+              Description:-<%=job.description%>    <br>
+              Skills:-<%=job.skills%><br>
+              Date Posted:-<%=job.dateposted%><br>
+              Loaction:-<%=job.location%><br>
+              Experience:-<%=job.experience%><br>
+              Base Salary:-<%=job.basesalary%><br>
+              Company:-<%=job.company.companyName%><br>
+              <%for(a of job.applicants){%>
+                
+                  <%if(a.user==user.id){%>
+                    <h6>status: <%=a.status%></h6>
+                  <%}%> 
+                  
+                  
+                
+              <% } %>
+          </li>
+              <hr>
+          <%}%>
+      </ul>
+  </div>
+
 
   <%}%>
   
