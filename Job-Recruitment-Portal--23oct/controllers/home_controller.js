@@ -37,7 +37,6 @@ module.exports.home=async function(req,res){
             arr.push(a);
 
         }
-        arr.sort((a, b) => (a.dateposted > b.dateposted) ? -1 : 1 );
         return res.render('home',{
             title: "Codecial|Home",
             jobs: arr,

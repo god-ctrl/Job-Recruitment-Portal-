@@ -1,0 +1,27 @@
+ <header>
+    
+  <div style="text-align: center;" class="navbar navbar-dark bg-dark shadow-sm">
+    <div class="container d-flex justify-content-between">
+      
+      <a href="/" class="navbar-brand d-flex align-items-center">
+        <i class="fas fa-key fa-2x"></i>
+        <strong>Job Portal</strong>
+      </a>
+      <%if(locals.user){%>
+        <% if(user.isuser){ %>
+          <a class="btn btn-dark btn-lg" href="/users/profile" role="button">profile</a>
+          <a class="btn btn-dark btn-lg" href="/users/sign-out" role="button">Sign Out</a>
+          <% }else{ %>
+            <a class="btn btn-dark btn-lg" href="/postjob/newjob" role="button">Post a job</a>
+            <a class="btn btn-dark btn-lg" href="/company/profile" role="button">profile</a>
+            <a class="btn btn-dark btn-lg" href="/company/sign-out" role="button">Sign Out</a>
+            <%}%>
+          <% } %>
+    </div>
+  </div>
+        
+ 
+</header> 
+
+
+

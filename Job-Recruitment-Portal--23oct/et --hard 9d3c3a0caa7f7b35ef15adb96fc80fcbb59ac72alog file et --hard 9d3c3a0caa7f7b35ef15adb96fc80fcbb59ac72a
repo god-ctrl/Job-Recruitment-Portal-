@@ -1,0 +1,115 @@
+[33mcommit 90394a662df64d3b8aa33873b5121791dab3779f[m[33m ([m[1;36mHEAD -> [m[1;32m22oct[m[33m, [m[1;31morigin/22oct[m[33m)[m
+Author: wargang <iamnitingangwar2000@gmail.com>
+Date:   Thu Oct 22 20:02:30 2020 +0530
+
+    postjob page created
+
+[33mcommit 47bca66aa830d52ff8efd8bd546b454c63c43a70[m
+Author: wargang <iamnitingangwar2000@gmail.com>
+Date:   Thu Oct 22 17:50:04 2020 +0530
+
+    post job route and controllers
+
+[33mcommit 90d5962154c4af90474d3524d071d0ad1d3956db[m[33m ([m[1;31morigin/devlopment[m[33m, [m[1;32mdevlopment[m[33m)[m
+Author: Nilotpal Das <neelot3pal@gmail.com>
+Date:   Thu Oct 22 14:24:42 2020 +0530
+
+    design changed
+
+[33mcommit 2e0f465016b7ebb68add04660ff38ea9f050b297[m
+Author: Nilotpal Das <neelot3pal@gmail.com>
+Date:   Thu Oct 22 14:18:44 2020 +0530
+
+    company created
+
+[33mcommit cc87716f8c288d82cb976dae97363bed6c534fee[m
+Author: wargang <iamnitingangwar2000@gmail.com>
+Date:   Wed Oct 21 21:23:05 2020 +0530
+
+    nilopa
+
+[33mcommit 95779e3db16c90d5ccc953da538c795ab3683be5[m[33m ([m[1;31morigin/wargang[m[33m, [m[1;31morigin/Nilotpal[m[33m)[m
+Author: Nilotpal Das <neelot3pal@gmail.com>
+Date:   Mon Oct 19 22:09:17 2020 +0530
+
+    flash message nocely set up
+
+[33mcommit 5d0331b7315929641aaffd3941433698baadfc8f[m
+Author: Nilotpal Das <neelot3pal@gmail.com>
+Date:   Sun Oct 18 11:03:40 2020 +0530
+
+    updation of user set up
+
+[33mcommit 53465eeca0915eab34989f208a70f7a07cbe5c01[m
+Author: Nilotpal Das <neelot3pal@gmail.com>
+Date:   Sat Oct 17 19:15:13 2020 +0530
+
+    profiles of friends showing
+
+[33mcommit 344546e4f78f02d8f5fa0cd14cb85811cf9455cf[m
+Author: Nilotpal Das <neelot3pal@gmail.com>
+Date:   Tue Oct 13 16:59:05 2020 +0530
+
+    comments are now displayed
+
+[33mcommit ca9f6faf3d9c656f40fd0f6b75c1fa26d211fc34[m
+Author: Nilotpal Das <neelot3pal@gmail.com>
+Date:   Tue Oct 13 02:12:53 2020 +0530
+
+    comments added to data base
+
+[33mcommit c94c754b1a14b5dc79e38f6de81df4f65fbf16e5[m
+Author: Nilotpal Das <neelot3pal@gmail.com>
+Date:   Mon Oct 12 23:39:16 2020 +0530
+
+    authentication done on post both in frontend and backend
+
+[33mcommit 614b2bfcc9e25ec5f8f3da4f763e9d1d78ae5e34[m
+Author: Nilotpal Das <neelot3pal@gmail.com>
+Date:   Mon Oct 12 22:27:06 2020 +0530
+
+    set up post database and entry into database
+
+[33mcommit b97387a224be322a97f489c4db83f4503c54b6dd[m
+Author: Nilotpal Das <neelot3pal@gmail.com>
+Date:   Mon Oct 12 19:47:55 2020 +0530
+
+    post form and schema created
+
+[33mcommit e904dbb6942b0c38c7b8bd3a6cd89e71bfa96446[m
+Merge: 5a57645 b373959
+Author: Nilotpal Das <neelot3pal@gmail.com>
+Date:   Mon Oct 12 15:08:39 2020 +0530
+
+    Merge branch 'master' of https://github.com/god-ctrl/Job-Recruitment-Portal-
+     updated to match master
+
+[33mcommit b373959addadb389087bca682d5286e566048a65[m
+Author: Nilotpal Das <neelot3pal@gmail.com>
+Date:   Mon Oct 12 14:58:19 2020 +0530
+
+    styles added (basic)
+
+[33mcommit 5a57645402b1e17d62557513c407e94bc45c5fa2[m[33m ([m[1;31morigin/nitin[m[33m)[m
+Author: wargang <iamnitingangwar2000@gmail.com>
+Date:   Sun Oct 11 13:31:59 2020 +0530
+
+    css for login and signup
+
+[33mcommit b8ca527a35f5ba9237cd45cffbaee2e3dbf4de18[m
+Author: Nilotpal Das <neelot3pal@gmail.com>
+Date:   Sun Oct 11 01:07:33 2020 +0530
+
+    sign out and sing up and signout set up
+
+[33mcommit b6f9273b1987d151ca0c0c721c79078b280c516a[m
+Author: Nilotpal Das <neelot3pal@gmail.com>
+Date:   Fri Oct 9 19:25:05 2020 +0530
+
+    signout set up
+
+[33mcommit ecb7cc72ce952a1a3eada4db07412b2d25c56f43[m
+Author: Nilotpal Das <neelot3pal@gmail.com>
+Date:   Thu Oct 8 14:52:49 2020 +0530
+
+    basic structure set up

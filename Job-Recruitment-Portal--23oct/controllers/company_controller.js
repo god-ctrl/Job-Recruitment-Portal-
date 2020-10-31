@@ -28,7 +28,6 @@ module.exports.profile=function(req,res){
                 }
             })
             .exec(function(err, job){
-                arr.sort((a, b) => (a.dateposted > b.dateposted) ? -1 : 1 );
                 return res.render('company',{
                     title: "Company",
                     profile_company: user,
