@@ -32,6 +32,10 @@ const userSchema=new mongoose.Schema({
     interest : {
         type : String,
         required : true
+    },
+    hidden_score: {
+        type: Number,
+        required: true
     }
     
 
