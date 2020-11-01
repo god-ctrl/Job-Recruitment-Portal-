@@ -45,19 +45,10 @@
         <%if(locals.user){%>
           
           <%if(user.isuser){%>
-            <form action="/users/getCompany" method="POST">
-              <input type="text" name="kompany" placeholder="Enter company Name or Typeof company" required>
-              <input type="submit" value="Search">
-            </form>
-            <%if(locals.companyFound){%>
-              <%=companyFound.length%>
-              <%for(company of companyFound){%>
-                <a href="/company/profile/<%=company._id%>"><%=company.companyName%></a>
-              <%}%>
-            <%}%>
-            <h2>JOBS</h2>
+            
+            
         <div id="job-list-container" style="background-color: #CCEABB;">
-
+          <h2>JOBS by your subscribed companies</h2>
           <ul>
               <%for(job of jobs){%>
                 <li>
@@ -78,6 +69,16 @@
               <%}%>
           </ul>
       </div>
+      <form action="/users/getCompany" method="POST">
+        <input type="text" name="kompany" size="40" placeholder="Enter company Name or Type of company" required>
+        <input type="submit" value="Search">
+      </form>
+      <%if(locals.companyFound){%>
+        <%=companyFound.length%>
+        <%for(company of companyFound){%>
+          <a href="/company/profile/<%=company._id%>"><%=company.companyName%></a>
+        <%}%>
+      <%}%>
     <% } %>
     <% } %>
 

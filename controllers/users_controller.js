@@ -76,6 +76,17 @@ module.exports.apply=function(req,res){
         }
         if(job.applicants.some(person => person.user == req.body.user)==false){
             job.applicants.push({user: req.body.user, status: "pending hai bro"});
+            job.applicants.sort(function(a, b){
+                if(a.hidden_score>b.hidden_score)
+                return 1;
+                else if(a.hidden_score<b.hidden_score)
+                return -1;
+                else{
+                    if(a.prior_experience>b.prior_experience)
+                    return 1;
+                    else return -1;
+                }
+            })
             job.save();
         } 
         
@@ -166,7 +177,14 @@ module.exports.create=function(req,res){
 
         if(!user)
         {
-            User.create(req.body,function(err,user){
+            var count=0;
+            if(req.body.q1 == 37)
+            count++;
+            if(req.body.q2 == 36)
+            count++;
+            if(req.body.q3 == 106)
+            count++;
+            User.create({email: req.body.email, name: req.body.name, password: req.body.password, prior_experience: req.body.prior_experience, interest: req.body.interest, isuser: req.body.isuser, hidden_score: count},function(err,user){
                 if(err){console.log('error in creating  user in signUp');return};
                 return res.redirect('/users/sign-in');
                 

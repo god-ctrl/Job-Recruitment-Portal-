@@ -35,7 +35,7 @@ module.exports.home=async function(req,res){
             let jobs= await Job.find({company:j}).populate('company').exec();
             for(a of jobs)
             arr.push(a);
-
+            
         }
         arr.sort((a, b) => (a.dateposted > b.dateposted) ? -1 : 1 );
         return res.render('home',{
