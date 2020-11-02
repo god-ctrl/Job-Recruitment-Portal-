@@ -120,9 +120,9 @@
                       <a href="/users/profile/<%=a.user.id%>"><%=a.user.name%></a> 
                       <h6>status: <%=a.status%></h6>
                       <%if(a.status!="confirmed"){%>
-                      <form action="/company/select/<%=a.user._id%>" method = "POST">
+                      <form action="/company/select/<%=j.id%>" method = "POST">
                       <input type="submit"  value="SELECT"> 
-                      <input type="hidden" name="company" value="<%=user._id%>">
+                      <input type="hidden" name="user" value="<%=a.user.id%>">
                     </form>
                   <% } %>
                     </li>

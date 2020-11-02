@@ -77,23 +77,23 @@ module.exports.profile2=function(req,res){
 // to select a candidate
 module.exports.select=function(req,res){
     
-    Job.find({company: req.body.company})
+    Job.findById(req.params.id)
        .populate('applicants') 
-       .exec(function(err, job){
+       .exec(function(err, b){
         
-           for(b of job)
-           {    
-               for(a of b.applicants){
+           
+               
+    for(a of b.applicants){
                 
-               if(a.user == req.params.id)
+               if(a.user == req.body.user)
                 {   
                     
                    a.status = "confirmed";
                    a.notification = "yes";
                 
                 }
-           }
-           b.save();
+           
+                b.save();
         //    console.log(b);
         }
            res.redirect('/company/profile');
