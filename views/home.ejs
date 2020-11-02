@@ -60,10 +60,20 @@
                   Experience:-<%=job.experience%><br>
                   Base Salary:-<%=job.basesalary%><br>
                   Company:-<%=job.company.companyName%><br>
-                  <form action="users/apply/<%=job._id%>" method = "POST">
+                  <%let flag=0;%>
+                  <%for(a of job.applicants){%>
+                    <%if(a.user==locals.user.id){%>
+                    <%flag++;%>
+                    <%}%>
+                  <%}%>
+                  <%if(flag==0){%>
+                    <form action="users/apply/<%=job._id%>" method = "POST">
                     <input type="submit"  value="APPLY"> 
                     <input type="hidden" name="user" value="<%=user._id%>">
-                  </form>
+                    </form>
+                    <%}else{%>
+                      <strong>Applied</strong>
+                      <%}%>
               </li>
                   <hr>
               <%}%>
@@ -80,10 +90,20 @@
                   Experience:-<%=job.experience%><br>
                   Base Salary:-<%=job.basesalary%><br>
                   Company:-<%=job.company.companyName%><br>
-                  <form action="users/apply/<%=job._id%>" method = "POST">
+                  <%let flag=0;%>
+                  <%for(a of job.applicants){%>
+                    <%if(a.user==locals.user.id){%>
+                    <%flag++;%>
+                    <%}%>
+                  <%}%>
+                  <%if(flag==0){%>
+                    <form action="users/apply/<%=job._id%>" method = "POST">
                     <input type="submit"  value="APPLY"> 
                     <input type="hidden" name="user" value="<%=user._id%>">
-                  </form>
+                    </form>
+                  <%}else{%>
+                    <strong>Applied</strong>
+                    <%}%>
               </li>
                   <hr>
               <%}%>
@@ -95,8 +115,9 @@
       </form>
       <%if(locals.companyFound){%>
         <%=companyFound.length%>
+        <br>
         <%for(company of companyFound){%>
-          <a href="/company/profile/<%=company._id%>"><%=company.companyName%></a>
+          <a href="/company/profile/<%=company._id%>"><%=company.companyName%></a><br>
         <%}%>
       <%}%>
     <% } %>
@@ -113,14 +134,14 @@
                          <h4>All Companies</h4>
                  <%for(c of all_company){%>
                             
-                             <p> 
+                  <p> 
                                   
-                                 <a href="/company/profile/<%=c._id%>"><%=c.companyName%></a>
-                                  <form action="users/subscribe/<%=c._id%>" method = "POST">
-                                    <input type="submit"  value="Subscribe"> 
-                                    <input type="hidden" name="user" value="<%=user._id%>">
-                                  </form>
-                             </p>
+                    <a href="/company/profile/<%=c._id%>"><%=c.companyName%></a>
+                     <form action="users/subscribe/<%=c._id%>" method = "POST">
+                       <input type="submit"  value="Subscribe"> 
+                       <input type="hidden" name="user" value="<%=user._id%>">
+                     </form>
+                </p>
                             
                          <%}%>
                      </section>

@@ -32,13 +32,13 @@ module.exports.home=async function(req,res){
         let arr=[];
         for(j of req.user.subs)
         {
-            let jobs= await Job.find({company:j}).populate('company').exec();
+            let jobs= await Job.find({company:j}).populate('company').populate('applicants').exec();
             for(a of jobs)
             arr.push(a);
             
         }
         arr.sort((a, b) => (a.dateposted > b.dateposted) ? -1 : 1 );
-        let rjobs = await Job.find({skills:req.user.interest}).populate('company').exec();
+        let rjobs = await Job.find({skills:req.user.interest}).populate('company').populate('applicants').exec();
         rjobs.sort((a, b) => (a.dateposted > b.dateposted) ? -1 : 1 );
         return res.render('home',{
             title: "Codecial|Home",

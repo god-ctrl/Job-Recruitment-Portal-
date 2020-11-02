@@ -41,30 +41,79 @@ module.exports.profile2 = async function (req, res) {
   }
 
 
-module.exports.getCompany=function(req,res) {
-    User.find({},function(err,users){
-        Job.find({})
-        .populate('company')
-        .exec(function(err, jobs){
-            Company.find({}, function(err, company){
-                console.log(req.body);
-                Company.find( { $or:[ {'companyName':req.body.kompany}, {'Type':req.body.kompany} ]},function(err,companyFound){
+module.exports.getCompany=async function(req,res){
+   
+        // console.log(req.cookies);
+        // res.cookie('user_id',25);
+        // Post.find({},function(err,posts){
+        //     return res.render('home',{
+        //         title: "Codecial|Home",
+        //         posts: posts
+        //    });
+        // });
+
+        // populate the user of each post
+        if(!(req.user))
+        {
+            return res.render('home',{title:'Job Portal|Home'});
+        }
+        if(req.user.isuser==false)
+        {
+            let company=await Company.find({});
+            return res.render('home',{
+                title: "Codecial|Home",
+                all_company: company
+        });
+        }
+        let company=await Company.find({});
+        let arr=[];
+        for(j of req.user.subs)
+        {
+            let jobs= await Job.find({company:j}).populate('company').populate('applicants').exec();
+            for(a of jobs)
+            arr.push(a);
+            
+        }
+        arr.sort((a, b) => (a.dateposted > b.dateposted) ? -1 : 1 );
+        let rjobs = await Job.find({skills:req.user.interest}).populate('company').populate('applicants').exec();
+        rjobs.sort((a, b) => (a.dateposted > b.dateposted) ? -1 : 1 );
+        
+        Company.find( { $or:[ {'companyName':req.body.kompany}, {'Type':req.body.kompany} ]},function(err,companyFound){
                             
-                        return res.render('home',{
-                        title: "Codecial|Home",
-                        jobs: jobs,
-                        all_users: users,
-                        all_company: company,
-                        companyFound: companyFound
-                });
+            return res.render('home',{
+            title: "Codecial|Home",
+            jobs: arr,
+            recomdedJobs: rjobs,
+            
+            all_company: company,
+            companyFound: companyFound
+        });
+
+       
+    });
+//     User.find({},function(err,users){
+//         Job.find({})
+//         .populate('company')
+//         .exec(function(err, jobs){
+//             Company.find({}, function(err, company){
+//                 console.log(req.body);
+//                 Company.find( { $or:[ {'companyName':req.body.kompany}, {'Type':req.body.kompany} ]},function(err,companyFound){
+                            
+//                         return res.render('home',{
+//                         title: "Codecial|Home",
+//                         jobs: jobs,
+//                         all_users: users,
+//                         all_company: company,
+//                         companyFound: companyFound
+//                 });
                 
-            });
-            });
+//             });
+//             });
             
         
-});
+// });
 
-});
+// });
 }
 module.exports.apply=function(req,res){
     
@@ -171,6 +220,9 @@ module.exports.signIn=function(req,res){
 module.exports.create=function(req,res){
     if(req.body.password != req.body.confirm_password){
     return res.redirect('back');
+    }
+    if(req.body.password.length<=6){
+        return res.redirect('back');                   // back means going back from where the req was made
     }
     User.findOne({email:req.body.email},function(err,user){
         if(err){console.log('error in finding user in signUp');return}

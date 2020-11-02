@@ -3,8 +3,8 @@
        
        <hr>
        <div style="align-content: flex-start;">
-        <a href="/users/sign-up"  class="btn btn-light btn-lg active" role="button" aria-pressed="true">Employee</a>
-        <a href="/company/sign-up"  class="btn btn-dark btn-lg active" role="button" aria-pressed="true">Recruiter</a>
+        <a href="/users/sign-up"  class="btn btn-dark btn-lg active" role="button" aria-pressed="true">Employee</a>
+        <a href="/company/sign-up"  class="btn btn-light btn-lg active" role="button" aria-pressed="true">Recruiter</a>
         </div>
        
         
@@ -16,10 +16,10 @@
                 <input type="email" name="email" class="form-control" placeholder="Email address" required autofocus>
              
                  <label for="inputPassword" class="sr-only">Password</label>
-                <input type="password" name="password" class="form-control" placeholder="Password" required>
+                <input type="password" pattern=".{6,}" name="password" class="form-control" placeholder="Password" required>
                    
                 <label for="inputPassword" class="sr-only">Confirm Password</label>
-                <input type="password" name="confirm_password" class="form-control" placeholder="Confirm Password" required>
+                <input type="password" pattern=".{6,}" name="confirm_password" class="form-control" placeholder="Confirm Password" required>
                 
                 <label for="prior_experience" class="sr-only">Prior_Experience </label>
                 <input type="number" name="prior_experience" placeholder="Exp. In Years" class="form-control">

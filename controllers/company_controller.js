@@ -144,6 +144,10 @@ module.exports.create=function(req,res){
     if(req.body.password != req.body.confirm_password){
     return res.redirect('back');                   // back means going back from where the req was made
     }
+    if(req.body.password.length<=6){
+        return res.redirect('back');                   // back means going back from where the req was made
+    }
+
     Company.findOne({email:req.body.email},function(err,user){
         if(err){console.log('error in finding user in signUp');return}
 
