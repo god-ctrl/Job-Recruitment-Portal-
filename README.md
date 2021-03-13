@@ -60,7 +60,7 @@ Its a project i worked on for my college tech fest (Avishkar 2020).Its basically
 
 ---
 
-## Authors 
+## Author Info
 
 
 
