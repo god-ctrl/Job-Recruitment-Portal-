@@ -13,6 +13,13 @@ const companySchema=new mongoose.Schema({
     companyName:{
         type: String,
         required:true
+    },
+    isuser: {
+        type: Boolean
+    },
+    Type: {
+        type: String,
+        required: true
     }
     // },
     // location:  {

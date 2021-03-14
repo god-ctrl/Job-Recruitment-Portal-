@@ -13,19 +13,30 @@ const userSchema=new mongoose.Schema({
     name:{
         type: String,
         required:true
+    },
+    isuser: {
+        type: Boolean
+    },
+    subs: [{
+        type:mongoose.Schema.Types.ObjectId,
+        ref: 'Company'
+    }],
+    applied_jobs: [{
+        type:mongoose.Schema.Types.ObjectId,
+        ref: 'Job'
+    }],
+    prior_experience: {
+        type: Number,
+        required: true
+    },
+    interest : {
+        type : String,
+        required : true
+    },
+    hidden_score: {
+        type: Number,
+        required: true
     }
-    // gender : {
-    //     type : String,
-    //     required : true
-    // },
-    // phoneNumber : {
-    //     type : Number,
-    //     required : true
-    // },
-    // interests : [{
-    //     title : String,
-    //     required : true
-    // }],
     
 
 },{

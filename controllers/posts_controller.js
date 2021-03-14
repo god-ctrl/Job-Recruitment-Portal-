@@ -4,6 +4,7 @@ const Comment=require('../models/comment');
 
 
 module.exports.create=function(req,res){
+    if(req.user.isuser==false){
     Post.create({
         content: req.body.content,
         user: req.user._id
@@ -15,10 +16,15 @@ module.exports.create=function(req,res){
         }
         return res.redirect('back');
     })
+    }
+    else{
+        return res.redirect('back');
+    }
 }
 
 
 module.exports.destroy = function(req,res){
+    if(req.user.isuser==false){
     Post.findById(req.params.id,function(err,post){
         //.id means converting the objectId into String
         if(post.user == req.user.id){
@@ -39,4 +45,9 @@ module.exports.destroy = function(req,res){
             return res.redirect('back');
         }
     });
+    }
+    else
+    {
+        return res.redirect('back');
+    }
 }

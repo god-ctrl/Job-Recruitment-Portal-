@@ -1,9 +1,13 @@
 const mongoose=require('mongoose');
 
 const applicationSchema=new mongoose.Schema({
-    
+
+    applicant: {
+        type: mongoose.Schema.Types.ObjectId, // NOT USING IT!!!!!!!!!!!!!
+        ref: 'User'
+    },    
     job:{
-        type:mongoose.Schema.Types.ObjectId,
+        type:mongoose.Schema.Types.ObjectId,// NOT USING IT!!!!!!!!!!!!!
         ref: 'Job'
     }
 },{

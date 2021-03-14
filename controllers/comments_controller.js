@@ -4,6 +4,7 @@ const Post=require('../models/post');
 
 
 module.exports.create = function(req, res){
+    if(req.user.isuser==true){
     Post.findById(req.body.post,function(err,post){
         if(post){
             Comment.create({
@@ -19,13 +20,18 @@ module.exports.create = function(req, res){
                 post.comments.push(comment);
                 post.save();
 
-                res.redirect('/');
+                res.redirect('back');
             });
         }
     })
+    }
+    else{
+        return res.redirect('back');
+    }
 }
 
 module.exports.destroy = function(req, res){
+    if(req.user.isuser){
     Comment.findById(req.params.id,function(err,comment){
         
         if(comment)
@@ -70,4 +76,9 @@ module.exports.destroy = function(req, res){
             return res.redirect('back');
         }
     })
+    }
+    else
+    {
+        return res.redirect('back');
+    }
 }

@@ -12,16 +12,20 @@
         <label for="inputEmail" class="sr-only">Name</label>
         <input type="name" name="companyName" class="form-control" placeholder="companyName" required autofocus>
 
+        <label for="Type" class="sr-only">Name</label>
+        <input type="text" name="Type" class="form-control" placeholder="Type of company" required autofocus>
+        
         <label for="inputEmail" class="sr-only">Email address</label>
         <input type="email" name="email" class="form-control" placeholder="Email address" required autofocus>
      
          <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" name="password" class="form-control" placeholder="Password" required>
+        <input type="password" pattern=".{6,}" name="password" class="form-control" placeholder="Password" required>
            
         <label for="inputPassword" class="sr-only">Confirm Password</label>
-        <input type="password" name="confirm_password" class="form-control" placeholder="Confirm Password" required>
+        <input type="password" pattern=".{6,}" name="confirm_password" class="form-control" placeholder="Confirm Password" required>
         
-        <input class="btn btn-dark btn-lg" type="submit" value="Sign In">
+        <input type="hidden" value="false" name="isuser">
+        <input class="btn btn-dark btn-lg" type="submit" value="Sign Up">
     </form>
   
     </div>
